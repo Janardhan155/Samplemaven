@@ -1,8 +1,16 @@
-mavenJob('build-pkg') {
-    
-    scm {
-        github('Janardhan155/Samplemaven', 'master')
+job('build-pkg') {
+    steps {
+        maven('package')
+        maven('clean package', 'module-a/pom.xml')
+        maven {
+            goals('clean')
+            goals('package')
+            mavenOpts('-Xms256m')
+            mavenOpts('-Xmx512m')
+            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+            properties(skipTests: true)
+            mavenInstallation('Maven 3.6.1')
+            providedSettings('central-mirror')
+        }
     }
-    
-    goals('clean package')
 }
