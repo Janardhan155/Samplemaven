@@ -1,0 +1,9 @@
+mavenJob('example') {
+    logRotator(-1, 10)
+    jdk('Java 7')
+    scm {
+        github('Janardhan155/Samplemaven', 'master')
+    }
+    
+    goals('clean package')
+}
